@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="216,111,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="159,200,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="84,143,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="95,25,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="454,127,0,0" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="456,209,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Margin="454,79,0,0" VerticalAlignment="Top" Width="120"/>
+        <ProgressBar HorizontalAlignment="Left" Value="{Binding ElementName=slider, Path=Value, Mode=OneWay}" Height="10" Margin="268,350,0,0" VerticalAlignment="Top" Width="100"/>
+        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="504,336,0,0" VerticalAlignment="Top" Width="120" Maximum="100"/>
 
     </Grid>
 </Window>
