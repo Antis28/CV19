@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV19Core", "CV19Core\CV19Core.csproj", "{B57154F9-E626-44CC-968C-E7D73E12B875}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{77CAF267-1EDC-43D6-A895-928929728768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV19Console", "Tests\CV19Console\CV19Console.csproj", "{3DA627CA-6E69-40D6-8EEF-C133373E478F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{B57154F9-E626-44CC-968C-E7D73E12B875}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B57154F9-E626-44CC-968C-E7D73E12B875}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B57154F9-E626-44CC-968C-E7D73E12B875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA627CA-6E69-40D6-8EEF-C133373E478F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA627CA-6E69-40D6-8EEF-C133373E478F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA627CA-6E69-40D6-8EEF-C133373E478F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA627CA-6E69-40D6-8EEF-C133373E478F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DA627CA-6E69-40D6-8EEF-C133373E478F} = {77CAF267-1EDC-43D6-A895-928929728768}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8BD5DCD9-A6E4-4B2E-AE6C-31D0F33B340B}
