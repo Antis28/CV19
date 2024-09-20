@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:CV19Core"
+        xmlns:cmd="clr-namespace:CV19Core.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Core.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -13,7 +14,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}"></MenuItem>
+                <!--<MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}"></MenuItem>-->
+                <MenuItem Header="Exit">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand></cmd:CloseApplicationCommand>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Help"></MenuItem>
         </Menu>
