@@ -6,8 +6,9 @@
         xmlns:l="clr-namespace:CV19Core"
         xmlns:cmd="clr-namespace:CV19Core.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Core.ViewModels"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        
+        FontSize="16"
         Title="MainWindow" Height="450" Width="800">
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Command="{Binding CloseApplicationCommand}"/>
@@ -17,6 +18,10 @@
     </Window.DataContext>
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="FontSize" Value="16"></Setter>
+            
+        </Style>
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -40,7 +45,13 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
-            <TabItem Header="Tab 1">
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Height="20" >
+                        <fa5:ImageAwesome Icon="Regular_File"  Margin="0,0,5,0" Foreground="Blue"/>
+                        <TextBlock FontSize="16" Text="Tab 1" ></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="106*"/>
@@ -51,16 +62,16 @@
                         <ColumnDefinition Width="637*"/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Grid.Column="0" Grid.Row="0"
-                            Margin="5,7"
-                            Fill="AliceBlue" Stroke="Aquamarine"
-                            StrokeThickness="3"
-                            RadiusX="5" RadiusY="7"
-                            />
+                               Margin="5,7"
+                               Fill="AliceBlue" Stroke="Aquamarine"
+                               StrokeThickness="3"
+                               RadiusX="5" RadiusY="7"
+                    />
                     <Ellipse Grid.Column="1" Grid.Row="0"
                              Margin="5,7"
                              Fill="MediumVioletRed" Stroke="DarkRed"
                              StrokeThickness="3"
-                             >
+                    >
                         <Ellipse.InputBindings>
                             <MouseBinding Command="{Binding CloseApplicationCommand}"
                                           MouseAction="LeftDoubleClick"/>
@@ -68,7 +79,15 @@
                     </Ellipse>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tab 2"></TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Height="20" Orientation="Horizontal">
+                        <fa5:ImageAwesome Icon="Regular_File"   
+                                          Margin="0,0,5,0" Foreground="Red"/>
+                        <TextBlock FontSize="16" Text="Tab 2" ></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
