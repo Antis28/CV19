@@ -30,7 +30,9 @@ namespace CV19Console
             {
                 var line = dataReader.ReadLine();
                 if (string.IsNullOrWhiteSpace(line)){continue;}
-                yield return line;
+                yield return line.Replace("Korea,", "Korea-")
+                    .Replace("Bonaire,", "Bonaire-")
+                    .Replace("Saint Helena,", "Saint Helena-");
             }
         }
 
@@ -40,16 +42,40 @@ namespace CV19Console
             .Skip(4)
             .Select(s=> DateTime.Parse(s, CultureInfo.InvariantCulture))
             .ToArray();
-        
 
+        private static IEnumerable<(string Province, string Country, int[] Counts)> GetData()
+        {
+            var lines = GetDataLines()
+                .Skip(1)
+                .Select(line => line.Split(','));
+
+            foreach (var row in lines)
+            {
+                var province = row[0].Trim();
+                var countryName = row[1].Trim(' ', '"');
+                var counts = row.Skip(4)
+                    .Select(int.Parse)
+                    .ToArray();
+
+                yield return (province, countryName, counts);
+            }
+        }
         static void Main(string[] args)
         {
-        //foreach (var dataLine in GetDataLines())
-        //{   
-        //    Console.WriteLine(dataLine);
-        //}
-            var dates = GetDates();
-            Console.WriteLine(string.Join("\r\n", dates));
+            //foreach (var dataLine in GetDataLines())
+            //{   
+            //    Console.WriteLine(dataLine);
+            //}
+            //var dates = GetDates();
+            //Console.WriteLine(string.Join("\r\n", dates));
+
+            var russiaData = GetData()
+                .First(
+                    v=> v.Country.Equals("Russia", StringComparison.InvariantCulture)
+                    );
+
+            Console.WriteLine(string.Join("\r\n", GetDates()
+                .Zip(russiaData.Counts,(date,count)=> $"{date:dd-MM-yyyy} - {count}")));
 
             Console.ReadLine();
         }
