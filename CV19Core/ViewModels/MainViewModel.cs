@@ -1,17 +1,22 @@
-﻿using CV19Core.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
+using CV19Core.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
 using CV19Core.Infrastructure.Commands;
+using CV19Core.Models;
 
 namespace CV19Core.ViewModels
 {
     internal class MainViewModel : ViewModel
     {
+
+        #region TestDataPoints : IEnumerable<DataPoint> - Test data
+        ///<summary>Test data</summary>
+        private IEnumerable<DataPoint> _testDataPoints;
+        ///<summary>Test data</summary>
+        public IEnumerable<DataPoint> TestDataPoints { get => _testDataPoints; set => Set(ref _testDataPoints, value); }
+        #endregion
+
         #region Title
         private string _title = "Анализ статистики CV19";
         /// <summary>Title wiwndow</summary>
@@ -57,6 +62,18 @@ namespace CV19Core.ViewModels
                 new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
             #endregion
+
+            var dataPoints = new List<DataPoint>((int)(360 / 0.1));
+            for (var x = 0d; x <= 360; x += 0.1)
+            {
+                const double toRad = Math.PI / 180;
+                var y = Math.Sin(x * toRad);
+
+                dataPoints.Add(new DataPoint{XValue = x,YValue = y});
+            }
+
+
+            TestDataPoints = dataPoints;
         }
     }
 }
