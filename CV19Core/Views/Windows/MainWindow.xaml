@@ -51,34 +51,24 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Height="20" >
                         <fa5:ImageAwesome Icon="Regular_File"  Margin="0,0,5,0" Foreground="Blue"/>
-                        <TextBlock FontSize="16" Text="Tab 1" ></TextBlock>
+                        <TextBlock FontSize="16" Text="" ></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="106*"/>
-                        <RowDefinition Height="325*"/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200*"/>
-                        <ColumnDefinition Width="637*"/>
+                        <ColumnDefinition Width="250"></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Rectangle Grid.Column="0" Grid.Row="0"
-                               Margin="5,7"
-                               Fill="AliceBlue" Stroke="Aquamarine"
-                               StrokeThickness="3"
-                               RadiusX="5" RadiusY="7"
-                    />
-                    <Ellipse Grid.Column="1" Grid.Row="0"
-                             Margin="5,7"
-                             Fill="MediumVioletRed" Stroke="DarkRed"
-                             StrokeThickness="3"
-                    >
-                        <Ellipse.InputBindings>
-                            <MouseBinding Command="{Binding CloseApplicationCommand}"
-                                          MouseAction="LeftDoubleClick"/>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
+                    <GroupBox Grid.Column="0" Header="Группы">
+                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name">
+
+                        </ListBox>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Студенты">
+                        <DataGrid>
+
+                        </DataGrid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem >

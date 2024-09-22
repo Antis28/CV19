@@ -6,6 +6,8 @@ using CV19Core.Models;
 using OxyPlot;
 using OxyPlot.Series;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using CV19Core.Models.Decanat;
 
 
 namespace CV19Core.ViewModels
@@ -13,8 +15,8 @@ namespace CV19Core.ViewModels
     internal class MainViewModel : ViewModel
     {
         /*----------------------------------------------------------------------------------------------------*/
-
-
+        
+        public ObservableCollection<Group> Groups { get; }
 
         #region TestDataPoints : IEnumerable<DataPointCV> - Test data
         ///<summary>Test data</summary>
@@ -80,9 +82,9 @@ namespace CV19Core.ViewModels
             var series = new LineSeries();
             //series.Points.Add(new DataPoint(0, 0));
             //series.Points.Add(new DataPoint(1, 1));
-            
 
 
+            /*--------------------------------------------------------------------*/
             var dataPoints = new List<DataPointCV>((int)(360 / 0.1));
             for (var x = 0d; x <= 360; x += 0.1)
             {
@@ -93,9 +95,24 @@ namespace CV19Core.ViewModels
                 series.Points.Add(new DataPoint(x,y));
             }
             TestDataPoints = dataPoints;
-
-
             PlotModel.Series.Add(series);
+            /*--------------------------------------------------------------------*/
+            var studentIndex = 1;
+            var students = Enumerable.Range(1, 10).Select(i => new Student
+            {
+                Name = $"Name - {studentIndex}",
+                Surname = $"Surname- {studentIndex}",
+                Patronymic = $"Patronymic- {studentIndex++}",
+                Birthday = DateTime.Now,
+                Rating = 0
+            });
+            var groups = Enumerable.Range(1, 20).Select(i => new Group
+            {
+                Name = $"Группа - {i}",
+                Students = new ObservableCollection<Student>(students)
+            });
+
+            Groups = new ObservableCollection<Group>(groups);
         }
         /*----------------------------------------------------------------------------------------------------*/
 
