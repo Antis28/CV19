@@ -6,12 +6,13 @@
         xmlns:l="clr-namespace:CV19Core"
         xmlns:cmd="clr-namespace:CV19Core.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Core.ViewModels"
+        xmlns:decanat="clr-namespace:CV19Core.Models.Decanat"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         mc:Ignorable="d"
         FontSize="16"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="900">
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
@@ -70,13 +71,26 @@
                                                             TargetNullValue='Группа не выбрана'}">
                         <DataGrid ItemsSource="{Binding SelectedGroup.Students}" 
                                   AutoGenerateColumns="False" 
-                                  IsReadOnly="True">
+                                  IsReadOnly="True"
+                                  GridLinesVisibility="Vertical"
+                                  VerticalGridLinesBrush="DarkGray"
+                                  AlternatingRowBackground="LightGray">
+                            <!--HorizontalGridLinesBrush="{x:Null}">-->
+                            <!--HorizontalGridLinesBrush="Transparent">-->
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='dd.MM.yyyy'}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"  Width="Auto" />
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                <!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='dd.MM.yyyy'}"/>-->
+                                <DataGridTemplateColumn Header="Дата рождения">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate DataType="{x:Type decanat:Student}">
+                                            <DatePicker SelectedDate="{Binding Birthday}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                                 <DataGridTextColumn Header="Рейтинг"  Binding="{Binding Rating}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Заметки" Binding="{Binding Description}"  Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
