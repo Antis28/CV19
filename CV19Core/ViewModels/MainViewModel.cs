@@ -1,20 +1,25 @@
-﻿using System.Text.RegularExpressions;
-using CV19Core.ViewModels.Base;
+﻿using CV19Core.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
 using CV19Core.Infrastructure.Commands;
 using CV19Core.Models;
+using OxyPlot;
+using OxyPlot.Series;
+using System.Collections.Generic;
+
 
 namespace CV19Core.ViewModels
 {
     internal class MainViewModel : ViewModel
     {
 
-        #region TestDataPoints : IEnumerable<DataPoint> - Test data
+
+
+        #region TestDataPoints : IEnumerable<DataPointCV> - Test data
         ///<summary>Test data</summary>
-        private IEnumerable<DataPoint> _testDataPoints;
+        private IEnumerable<DataPointCV> _testDataPoints;
         ///<summary>Test data</summary>
-        public IEnumerable<DataPoint> TestDataPoints { get => _testDataPoints; set => Set(ref _testDataPoints, value); }
+        public IEnumerable<DataPointCV> TestDataPoints { get => _testDataPoints; set => Set(ref _testDataPoints, value); }
         #endregion
 
         #region Title
@@ -52,7 +57,7 @@ namespace CV19Core.ViewModels
         #endregion
 
 
-
+        public PlotModel PlotModel { get; set; }
         #endregion
         public MainViewModel()
         {
@@ -63,17 +68,33 @@ namespace CV19Core.ViewModels
 
             #endregion
 
-            var dataPoints = new List<DataPoint>((int)(360 / 0.1));
+
+            PlotModel = new PlotModel { Title = "My First Plot"};
+            var series = new LineSeries();
+            //series.Points.Add(new DataPoint(0, 0));
+            //series.Points.Add(new DataPoint(1, 1));
+
+            
+
+
+
+
+
+
+
+            var dataPoints = new List<DataPointCV>((int)(360 / 0.1));
             for (var x = 0d; x <= 360; x += 0.1)
             {
                 const double toRad = Math.PI / 180;
                 var y = Math.Sin(x * toRad);
 
-                dataPoints.Add(new DataPoint{XValue = x,YValue = y});
+                dataPoints.Add(new DataPointCV { XValue = x,YValue = y});
+                series.Points.Add(new DataPoint(x,y));
             }
-
-
             TestDataPoints = dataPoints;
+
+
+            PlotModel.Series.Add(series);
         }
     }
 }

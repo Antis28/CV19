@@ -7,6 +7,8 @@
         xmlns:cmd="clr-namespace:CV19Core.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Core.ViewModels"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         mc:Ignorable="d"
         FontSize="16"
         Title="MainWindow" Height="450" Width="800">
@@ -20,9 +22,9 @@
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
         <Style TargetType="{x:Type MenuItem}">
             <Setter Property="FontSize" Value="16"></Setter>
-            
         </Style>
     </Window.Resources>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -79,14 +81,15 @@
                     </Ellipse>
                 </Grid>
             </TabItem>
-            <TabItem>
+            <TabItem >
                 <TabItem.Header>
                     <StackPanel Height="20" Orientation="Horizontal">
                         <fa5:ImageAwesome Icon="Regular_File"   
                                           Margin="0,0,5,0" Foreground="Red"/>
-                        <TextBlock FontSize="16" Text="Tab 2" ></TextBlock>
+                        <TextBlock FontSize="16" Text="График" ></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
+                <oxy:PlotView Model="{Binding PlotModel}" ></oxy:PlotView>
             </TabItem>
         </TabControl>
     </DockPanel>
