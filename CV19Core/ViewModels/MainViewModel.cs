@@ -15,7 +15,7 @@ namespace CV19Core.ViewModels
     internal class MainViewModel : ViewModel
     {
         /*----------------------------------------------------------------------------------------------------*/
-        
+
         public ObservableCollection<Group> Groups { get; }
 
 
@@ -26,12 +26,6 @@ namespace CV19Core.ViewModels
         ///<summary>Выбранная группа</summary>
         public Group SelectedGroup { get => _SelectedGroup; set => Set(ref _SelectedGroup, value); }
         #endregion
-         
-
-
-
-
-
 
 
         #region TestDataPoints : IEnumerable<DataPointCV> - Test data
@@ -54,7 +48,7 @@ namespace CV19Core.ViewModels
         #region Status : string - Статус программы
         /// <summary> Статус программы </summary>
         private string _status = "Готов!";
-        
+
 
         /// <summary>
         /// Статус программы
@@ -80,6 +74,46 @@ namespace CV19Core.ViewModels
         #endregion
 
 
+        #region CreateNewGroupCommand - Создает новую группу
+
+        ///<summary>Создает новую группу</summary>
+        public ICommand CreateNewGroupCommand { get; }
+
+        private bool CanCreateNewGroupCommandExecute(object p) => true;
+
+        private void OnCreateNewGroupCommandExecuted(object p)
+        {
+            var groupMaxIndex = Groups.Count + 1;
+            var newGroup = new Group
+            {
+                Name = $"Группа {groupMaxIndex}",
+                Students = new ObservableCollection<Student>()
+            };
+            Groups.Add(newGroup);
+        }
+        #endregion
+
+
+        #region DeleteGroupCommand - Удаляет существующую группу
+
+        ///<summary>Удаляет существующую группу</summary>
+        public ICommand DeleteGroupCommand { get; }
+
+        private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
+
+        private void OnDeleteGroupCommandExecuted(object p)
+        {
+            if (!(p is Group group)) { return; }
+
+            var groupIndex = Groups.IndexOf(group);
+            Groups.Remove(group);
+            if (groupIndex < Groups.Count) { SelectedGroup = Groups[groupIndex]; }
+        }
+        #endregion
+
+
+
+
         public PlotModel PlotModel { get; set; }
         #endregion
 
@@ -91,10 +125,16 @@ namespace CV19Core.ViewModels
             CloseApplicationCommand =
                 new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
+
+            CreateNewGroupCommand =
+                new LambdaCommand(OnCreateNewGroupCommandExecuted, CanCreateNewGroupCommandExecute);
+
+            DeleteGroupCommand =
+                new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
             #endregion
 
 
-            PlotModel = new PlotModel { Title = "My First Plot"};
+            PlotModel = new PlotModel { Title = "My First Plot" };
             var series = new LineSeries();
             //series.Points.Add(new DataPoint(0, 0));
             //series.Points.Add(new DataPoint(1, 1));
@@ -107,8 +147,8 @@ namespace CV19Core.ViewModels
                 const double toRad = Math.PI / 180;
                 var y = Math.Sin(x * toRad);
 
-                dataPoints.Add(new DataPointCV { XValue = x,YValue = y});
-                series.Points.Add(new DataPoint(x,y));
+                dataPoints.Add(new DataPointCV { XValue = x, YValue = y });
+                series.Points.Add(new DataPoint(x, y));
             }
             TestDataPoints = dataPoints;
             PlotModel.Series.Add(series);
