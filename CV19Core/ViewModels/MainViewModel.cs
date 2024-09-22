@@ -12,6 +12,7 @@ namespace CV19Core.ViewModels
 {
     internal class MainViewModel : ViewModel
     {
+        /*----------------------------------------------------------------------------------------------------*/
 
 
 
@@ -32,8 +33,10 @@ namespace CV19Core.ViewModels
         }
         #endregion
 
+        #region Status : string - Статус программы
         /// <summary> Статус программы </summary>
         private string _status = "Готов!";
+        
 
         /// <summary>
         /// Статус программы
@@ -43,6 +46,8 @@ namespace CV19Core.ViewModels
             get { return _status; }
             set { Set(ref _status, value); }
         }
+        #endregion
+        /*----------------------------------------------------------------------------------------------------*/
 
         #region Commands
 
@@ -59,6 +64,8 @@ namespace CV19Core.ViewModels
 
         public PlotModel PlotModel { get; set; }
         #endregion
+
+        /*----------------------------------------------------------------------------------------------------*/
         public MainViewModel()
         {
             #region Команды
@@ -73,13 +80,7 @@ namespace CV19Core.ViewModels
             var series = new LineSeries();
             //series.Points.Add(new DataPoint(0, 0));
             //series.Points.Add(new DataPoint(1, 1));
-
             
-
-
-
-
-
 
 
             var dataPoints = new List<DataPointCV>((int)(360 / 0.1));
@@ -96,5 +97,7 @@ namespace CV19Core.ViewModels
 
             PlotModel.Series.Add(series);
         }
+        /*----------------------------------------------------------------------------------------------------*/
+
     }
 }
