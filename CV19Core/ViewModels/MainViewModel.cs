@@ -18,6 +18,22 @@ namespace CV19Core.ViewModels
         
         public ObservableCollection<Group> Groups { get; }
 
+
+
+        #region SelectedGroup : Group - Выбранная группа
+        ///<summary>Выбранная группа</summary>
+        private Group _SelectedGroup;
+        ///<summary>Выбранная группа</summary>
+        public Group SelectedGroup { get => _SelectedGroup; set => Set(ref _SelectedGroup, value); }
+        #endregion
+         
+
+
+
+
+
+
+
         #region TestDataPoints : IEnumerable<DataPointCV> - Test data
         ///<summary>Test data</summary>
         private IEnumerable<DataPointCV> _testDataPoints;
