@@ -59,7 +59,7 @@ namespace CV19Core.ViewModels
             set { Set(ref _status, value); }
         }
         #endregion
-        /*----------------------------------------------------------------------------------------------------*/
+        
 
         #region Commands
 
@@ -117,7 +117,20 @@ namespace CV19Core.ViewModels
         public PlotModel PlotModel { get; set; }
         #endregion
 
-        /*----------------------------------------------------------------------------------------------------*/
+        public DirectoryViewModel DiskRootDir { get; } = new DirectoryViewModel(@"c:\");
+
+
+        #region SelectedDirectory : DirectoryViewModel - Выбранная директория
+        ///<summary>Выбранная директория</summary>
+        private DirectoryViewModel _selectedDirectory;
+        ///<summary>Выбранная директория</summary>
+        public DirectoryViewModel SelectedDirectory { get => _selectedDirectory; set => Set(ref _selectedDirectory, value); }
+        #endregion
+
+
+
+        #region constructor
+
         public MainViewModel()
         {
             #region Команды
@@ -133,7 +146,7 @@ namespace CV19Core.ViewModels
                 new LambdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
             #endregion
 
-
+            #region PlotModel
             PlotModel = new PlotModel { Title = "My First Plot" };
             var series = new LineSeries();
             //series.Points.Add(new DataPoint(0, 0));
@@ -153,6 +166,10 @@ namespace CV19Core.ViewModels
             TestDataPoints = dataPoints;
             PlotModel.Series.Add(series);
             /*--------------------------------------------------------------------*/
+            #endregion
+
+            #region studet test (Group)
+
             var studentIndex = 1;
             var students = Enumerable.Range(1, 10).Select(i => new Student
             {
@@ -169,8 +186,11 @@ namespace CV19Core.ViewModels
             });
 
             Groups = new ObservableCollection<Group>(groups);
+
+            #endregion
         }
-        /*----------------------------------------------------------------------------------------------------*/
+        #endregion
+
 
     }
 }

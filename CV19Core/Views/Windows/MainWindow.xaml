@@ -25,7 +25,7 @@
             <Setter Property="FontSize" Value="16"></Setter>
         </Style>
     </Window.Resources>
-    
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -48,7 +48,7 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
-            <TabItem >
+            <TabItem Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Height="20" >
                         <fa5:ImageAwesome Icon="Regular_File"  Margin="0,0,5,0" Foreground="Blue"/>
@@ -119,7 +119,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem >
+            <TabItem Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Height="20" Orientation="Horizontal">
                         <fa5:ImageAwesome Icon="Regular_File"   
@@ -128,6 +128,52 @@
                     </StackPanel>
                 </TabItem.Header>
                 <oxy:PlotView Model="{Binding PlotModel}" ></oxy:PlotView>
+            </TabItem>
+            <TabItem Header="Файловая система">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Директории">
+                        <!-- <ListBox
+                            ItemsSource="{Binding DiskRootDir.DirectoryItems}"
+                            SelectedIndex="0"
+                            SelectedItem="{Binding SelectedDirectory}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   ToolTip="{Binding CreationDate}" />                                        
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox> -->
+                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
+                            <TreeView.ItemTemplate>
+                                <!--<DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   ToolTip="{Binding CreationDate}" />
+                                    </StackPanel>
+                                </DataTemplate>-->
+                                <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
+                                                          ItemsSource="{Binding DirectoryItems}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   ToolTip="{Binding CreationDate}" />
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Файлы">
+                        <ListBox ItemsSource="{Binding SelectedDirectory}"/>
+                    </GroupBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
