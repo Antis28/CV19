@@ -39,7 +39,7 @@ namespace CV19Core.ViewModels
                 try
                 {
                     return _directoryInfo
-                       .EnumerateDirectories()
+                       .EnumerateFiles()
                        .Select(file => new FileViewModel(file.FullName));
                 }
                 catch (UnauthorizedAccessException e)

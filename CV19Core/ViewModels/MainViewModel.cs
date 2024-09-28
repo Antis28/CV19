@@ -123,8 +123,13 @@ namespace CV19Core.ViewModels
         #region SelectedDirectory : DirectoryViewModel - Выбранная директория
         ///<summary>Выбранная директория</summary>
         private DirectoryViewModel _selectedDirectory;
+
         ///<summary>Выбранная директория</summary>
-        public DirectoryViewModel SelectedDirectory { get => _selectedDirectory; set => Set(ref _selectedDirectory, value); }
+        public DirectoryViewModel SelectedDirectory
+        {
+            get => _selectedDirectory; 
+            set => Set(ref _selectedDirectory, value);
+        }
         #endregion
 
 

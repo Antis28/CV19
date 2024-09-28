@@ -1,6 +1,17 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 
+/*
+ *
+ *и добавьте это в свой xaml:
+
+   <local:ExtendedTreeView ItemsSource="{Binding Items}" SelectedItem_="{Binding Item, Mode=TwoWay}">
+   .....
+   </local:ExtendedTreeView>
+ *
+ *
+ */
+
 namespace CV19Core.Views.Extended
 {
     public class ExtendedTreeView : TreeView

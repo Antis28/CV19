@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:CV19Core"
+        xmlns:ext="clr-namespace:CV19Core.Views.Extended"
         xmlns:cmd="clr-namespace:CV19Core.Infrastructure.Commands"
         xmlns:vm="clr-namespace:CV19Core.ViewModels"
         xmlns:decanat="clr-namespace:CV19Core.Models.Decanat"
@@ -48,6 +49,64 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
+            <TabItem Header="Файловая система">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Директории">
+                        <!-- <ListBox
+                 ItemsSource="{Binding DiskRootDir.DirectoryItems}"
+                 SelectedIndex="0"
+                 SelectedItem="{Binding SelectedDirectory}">
+                 <ListBox.ItemTemplate>
+                     <DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
+                         <StackPanel Orientation="Horizontal">
+                             <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
+                             <TextBlock Text="{Binding Name}" 
+                                        ToolTip="{Binding CreationDate}" />                                        
+                         </StackPanel>
+                     </DataTemplate>
+                 </ListBox.ItemTemplate>
+             </ListBox> -->
+                        <GroupBox.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
+                                           ItemsSource="{Binding DirectoryItems}">
+                                <StackPanel Orientation="Horizontal">
+                                    <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                    ToolTip="{Binding CreationDate}" />
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                            <DataTemplate DataType="{x:Type vm:FileViewModel}">
+                                <StackPanel Orientation="Horizontal" ToolTip="{Binding CreationDate}">
+                                    <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_FileAlt" Foreground="DarkBlue" Height="12"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                ToolTip="{Binding CreationDate}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.Resources>
+                        <ext:ExtendedTreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}" 
+                                  SelectedItem_="{Binding SelectedDirectory, Mode=TwoWay}"
+                            />
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Файлы">
+                        <ListBox ItemsSource="{Binding SelectedDirectory.Files, Mode=OneWay}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:FileViewModel}">
+                                    <UniformGrid>
+                                        <TextBlock Text="Имя файла" Margin="5,0"/>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <TextBlock Text="Создан" Margin="5,0"/>
+                                        <TextBlock Text="{Binding CreationDate}"></TextBlock>
+                                    </UniformGrid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
             <TabItem Visibility="Collapsed">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Height="20" >
@@ -128,52 +187,6 @@
                     </StackPanel>
                 </TabItem.Header>
                 <oxy:PlotView Model="{Binding PlotModel}" ></oxy:PlotView>
-            </TabItem>
-            <TabItem Header="Файловая система">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Директории">
-                        <!-- <ListBox
-                            ItemsSource="{Binding DiskRootDir.DirectoryItems}"
-                            SelectedIndex="0"
-                            SelectedItem="{Binding SelectedDirectory}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   ToolTip="{Binding CreationDate}" />                                        
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox> -->
-                        <TreeView ItemsSource="{Binding DiskRootDir.DirectoryItems}">
-                            <TreeView.ItemTemplate>
-                                <!--<DataTemplate DataType="{x:Type vm:DirectoryViewModel}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   ToolTip="{Binding CreationDate}" />
-                                    </StackPanel>
-                                </DataTemplate>-->
-                                <HierarchicalDataTemplate DataType="{x:Type vm:DirectoryViewModel}"
-                                                          ItemsSource="{Binding DirectoryItems}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <fa5:SvgAwesome Margin="0,0,5,0" Icon="Solid_Folder" Foreground="Red" Height="12"/>
-                                        <TextBlock Text="{Binding Name}" 
-                                                   ToolTip="{Binding CreationDate}" />
-                                    </StackPanel>
-                                </HierarchicalDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-                    </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Файлы">
-                        <ListBox ItemsSource="{Binding SelectedDirectory}"/>
-                    </GroupBox>
-                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
