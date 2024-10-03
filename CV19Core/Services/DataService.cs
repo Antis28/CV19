@@ -32,7 +32,7 @@ namespace CV19Core.Services
         /// <returns></returns>
         private static IEnumerable<string> GetDataLines()
         {
-            using var dataStream = GetDataStream().Result;
+            using var dataStream = Task.Run(GetDataStream).Result;
             using var dataReader = new StreamReader(dataStream);
             while (!dataReader.EndOfStream)
             {
