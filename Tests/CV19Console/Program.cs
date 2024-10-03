@@ -43,6 +43,10 @@ namespace CV19Console
             .Select(s=> DateTime.Parse(s, CultureInfo.InvariantCulture))
             .ToArray();
 
+        /// <summary>
+        /// Извлекает информацию по каждой стране
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<(string Province, string Country, int[] Counts)> GetData()
         {
             var lines = GetDataLines()
@@ -66,7 +70,7 @@ namespace CV19Console
             //{   
             //    Console.WriteLine(dataLine);
             //}
-            //var dates = GetDates();
+            //var dates = GetDates(); 
             //Console.WriteLine(string.Join("\r\n", dates));
 
             var russiaData = GetData()
