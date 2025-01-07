@@ -6,12 +6,19 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
+using System.Xaml;
 
 namespace CV19Core.ViewModels.Base
 {
     internal abstract class ViewModel : MarkupExtension, INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private WeakReference _targetReference;
+        private WeakReference _rootReference;
+
+        public object TargetReference => _targetReference.Target;
+        public object RootReference => _rootReference.Target;
 
         public void Dispose()
         {
@@ -49,7 +56,20 @@ namespace CV19Core.ViewModels.Base
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
+            var valueTargetService = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
+            var rootObjectService = serviceProvider.GetService(typeof(IRootObjectProvider)) as IRootObjectProvider;
+
+            OnInitialized(valueTargetService?.TargetObject,
+                          valueTargetService?.TargetProperty, 
+                          rootObjectService?.RootObject);
+
             return this;
+        }
+
+        protected virtual void OnInitialized(object target,object property, object root)
+        {
+            _targetReference = new WeakReference(target);
+            _rootReference = new WeakReference(root);
         }
     }
 }
