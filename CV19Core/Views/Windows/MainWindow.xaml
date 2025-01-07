@@ -13,13 +13,11 @@
         xmlns:series="clr-namespace:OxyPlot.Series;assembly=OxyPlot"
         mc:Ignorable="d"
         FontSize="16"
-        Title="MainWindow" Height="450" Width="900">
+        DataContext="{vm:MainViewModel}"
+        Title="{Binding Title}" Height="450" Width="900">
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Command="{Binding CloseApplicationCommand}"/>
     </Window.InputBindings>
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
     <Window.Resources>
         <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
         <Style TargetType="{x:Type MenuItem}">
