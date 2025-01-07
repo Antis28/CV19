@@ -7,11 +7,13 @@ using OxyPlot;
 using OxyPlot.Series;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Markup;
 using CV19Core.Models.Decanat;
 
 
 namespace CV19Core.ViewModels
 {
+    [MarkupExtensionReturnType(typeof(MainViewModel))]
     internal class MainViewModel : ViewModel
     {
         /*----------------------------------------------------------------------------------------------------*/
