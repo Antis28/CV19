@@ -1,14 +1,13 @@
-﻿using CV19Core.ViewModels.Base;
-using System.Windows;
-using System.Windows.Input;
-using CV19Core.Infrastructure.Commands;
+﻿using CV19Core.Infrastructure.Commands;
 using CV19Core.Models;
+using CV19Core.Models.Decanat;
+using CV19Core.ViewModels.Base;
 using OxyPlot;
 using OxyPlot.Series;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Markup;
-using CV19Core.Models.Decanat;
 
 
 namespace CV19Core.ViewModels
@@ -16,6 +15,8 @@ namespace CV19Core.ViewModels
     [MarkupExtensionReturnType(typeof(MainViewModel))]
     internal class MainViewModel : ViewModel
     {
+        /*----------------------------------------------------------------------------------------------------*/
+        private readonly CountriesStatisticsViewModel _countriesStatisticsViewModel;
         /*----------------------------------------------------------------------------------------------------*/
 
         public ObservableCollection<Group> Groups { get; }
@@ -141,6 +142,9 @@ namespace CV19Core.ViewModels
 
         public MainViewModel()
         {
+            // Создаем дочернюю view-model и даём ей ссылку на главную модель.
+            _countriesStatisticsViewModel = new CountriesStatisticsViewModel(this);
+
             #region Команды
 
             CloseApplicationCommand =
