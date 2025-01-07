@@ -47,6 +47,9 @@
             </StatusBarItem>
         </StatusBar>
         <TabControl>
+            <TabItem Header="Статистика">
+                <Grid></Grid>
+            </TabItem>
             <TabItem Visibility="Visible">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Height="20" >
