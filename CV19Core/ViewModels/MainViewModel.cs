@@ -71,7 +71,8 @@ namespace CV19Core.ViewModels
 
         private void OnCloseApplicationCommandExecuted(object p)
         {
-            Application.Current.Shutdown();
+            //Application.Current.Shutdown();
+             (RootReference as Window)?.Close();
         }
         #endregion
 
