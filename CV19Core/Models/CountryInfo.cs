@@ -5,6 +5,7 @@ namespace CV19Core.Models
     internal class CountryInfo : PlaceInfo
     {
         private Point? _location;
+        
 
         public override Point Location
         {
@@ -19,8 +20,8 @@ namespace CV19Core.Models
             }
             set => _location = value;
         }
-
-        public IEnumerable<ProvinceInfo> Provinces { get; set; }
+        
+        public IEnumerable<PlaceInfo> Provinces { get; set; }
 
         private IEnumerable<ConfirmedCount> _counts;
 
@@ -50,5 +51,7 @@ namespace CV19Core.Models
             }
             set => _counts = value;
         }
+
+        
     }
 }
